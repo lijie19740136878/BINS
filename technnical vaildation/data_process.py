@@ -164,7 +164,7 @@ class ProcesscamiData:
 
         with open(self.data_path + "re_data/labels.txt", 'w', encoding="utf-8") as fp:
             fp.write("\n".join(["No predicate"] + list(rels)))
-        # print("schema.py没有问题，没有问题哦")
+
     def get_ents(self):
         ents = set()
         rels = defaultdict(list)
@@ -249,7 +249,7 @@ class ProcesscamiData:
                 spo_list = line['spo_list']
 
                 ent_rel_dict = defaultdict(list)
-                sub_obj = []  # 用于存储关系对
+                sub_obj = []  # 
                 for j, spo in enumerate(spo_list):
                     if spo['subject'] == "" or spo['object']['@value'] == "":
                         continue
@@ -260,7 +260,6 @@ class ProcesscamiData:
                     ent_rel_dict[spo["predicate"]].append((sbj, obj))
                     res.append(tmp)
                 
-                # 重点是怎么构造负样本：没有关系的
                 for k, v in ent_rel_dict.items():
                     sbjs = list(set([p[0] for p in v]))
                     objs = list(set([p[1] for p in v]))
